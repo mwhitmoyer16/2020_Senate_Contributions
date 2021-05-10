@@ -1,7 +1,6 @@
 #Creating the flow diagrams with Chord (OPTIONAL)
 #MWhitmoyer
 
-
 import pandas as pd
 from chord import Chord
 
@@ -32,11 +31,13 @@ rep.fillna(0,inplace=True)
 o_matrix = overall.values.tolist()
 d_matrix = dem.values.tolist()
 r_matrix = rep.values.tolist()
+
 #%%
 #makign the diagram
 Chord(o_matrix,header_list,wrap_labels=False,padding=0.05,font_size_large="14px").to_html('overall_chord.html')
 Chord(d_matrix,header_list,wrap_labels=False,padding=0.05,font_size_large="14px").to_html('dem_chord.html')
 Chord(r_matrix,header_list,wrap_labels=False,padding=0.05,font_size_large="14px").to_html('rep_chord.html')
+
 #%%
 #example of edit you may want to make to the resulting html files on line 408 to make the flow diagram clearer
 #w/o the edit it will refe to the flows 'instances' of occurrence btw two given states instead

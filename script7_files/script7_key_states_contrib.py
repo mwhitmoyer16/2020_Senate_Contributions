@@ -5,8 +5,8 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
 
-key_states = pd.read_pickle('C:/Users/mswhi/Documents/Advanced Project/Script5_Files/key_states_pkl.zip')
-pop = pd.read_csv('C:/Users/mswhi/Documents/Advanced Project/Script4_Files/pop.csv')
+key_states = pd.read_pickle('key_states_pkl.zip')
+pop = pd.read_csv('pop.csv')
 pop = pop.rename({'STATE':'SOURCE_STATE'},axis='columns')
 
 ###ANALYZING BY CONTRIBUTION SOURCE AND SIZE

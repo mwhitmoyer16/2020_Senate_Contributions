@@ -4,8 +4,8 @@
 import pandas as pd
 
 #reading in the files for candidates/committees and contributions to Senate General Elections in 2020
-com_cand = pd.read_csv('C:/Users/mswhi/Documents/Advanced Project/Script1_Files/com_cand.csv')
-contrib = pd.read_pickle('C:/Users/mswhi/Documents/Advanced Project/Script3_Files/contrib_pkl.zip') 
+com_cand = pd.read_csv('com_cand.csv')
+contrib = pd.read_pickle('contrib_pkl.zip') 
 
 #%%
 ###MERGING AND FILTERING THE FINAL BIG DATAFRAME
@@ -56,22 +56,3 @@ merged.to_pickle('all_states_pkl.zip')
 key_states = merged.query("RECIPIENT_STATE == 'KY' or RECIPIENT_STATE == 'GA' or RECIPIENT_STATE == 'SC' or RECIPIENT_STATE == 'AZ'")
 key_states.to_pickle('key_states_pkl.zip')
 
-#%%
- ###look at g23 to see that thing to get rid of negative contributions
-                #grouping contributions by zipcode and party
-                    grouped = pa.groupby(['zip','party'])
-                    amount = grouped['amt'].sum()
-                    amount = amount.where(amount>0,0)
-                    wide = amount.unstack(level='party')
-                    wide.fillna(0,inplace=True)
-                    wide['total'] = wide.sum(axis='columns')
-            
-            #column for small or large donor
-            ###talk to wilcoxen
-            print(merged['TRANSACTION_AMT'].value_counts())
-            if merged["TRANSACTION_AMT"] >= 200:
-                return merged["DONOR_TYPE"] == 'Large'
-                elif:
-                    return merged["DONOR_TYPE"] == 'Small'
-            merged["DONOR_TYPE"] = 
-            

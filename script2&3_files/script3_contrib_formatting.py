@@ -8,7 +8,7 @@
 import pandas as pd
 
 #creating Pandas dataframe and trying to cut out some ofthe unnecessary columns
-raw = pd.read_csv("C:/Users/mswhi/Documents/Advanced Project/Script2_Files/contrib2020.csv",dtype=str)   
+raw = pd.read_csv("contrib2020.csv",dtype=str)   
 contrib_raw = pd.DataFrame(raw, columns= ['CMTE_ID','TRANSACTION_PGI','ENTITY_TP','STATE','ZIP_CODE','TRANSACTION_DT','TRANSACTION_AMT'])
 n_now = len(contrib_raw) 
 print('\nNumber of records read:',n_now)

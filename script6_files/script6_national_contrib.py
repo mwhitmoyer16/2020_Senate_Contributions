@@ -5,8 +5,8 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
 
-merged = pd.read_pickle('C:/Users/mswhi/Documents/Advanced Project/Script5_Files/all_states_pkl.zip')
-pop = pd.read_csv('C:/Users/mswhi/Documents/Advanced Project/Script4_Files/pop.csv')
+merged = pd.read_pickle('all_states_pkl.zip')
+pop = pd.read_csv('pop.csv')
 pop = pop.rename({'STATE':'SOURCE_STATE'},axis='columns')
 
 #%%
@@ -26,10 +26,9 @@ grouped_by_size = merged.groupby(['RECIPIENT_STATE','PARTY','SMALL_CONTRIBUTION'
 size_dem_rep_summary = grouped_by_size['AMOUNT'].agg(['count','sum','mean'])
 print(f'Breakdown of the number, total amount, and mean of small and large contributions by state and party:\n{size_dem_rep_summary}')
 
-size_count = size_dem_rep_summary['count']
-size_count = size_count.reset_index(level=['PARTY','SMALL_CONTRIBUTION'])
+#creating a scatter plot to visualize the amount of small and large contributions in each state and their relationship with party
+#***Under Construction*** 
 
-#######Lets make a df that has headers as recipient state, small, large, party, and count maybe, maybe wanna do this on df before I did the summary info
 #%%
 ###FINDING THE TOP CONTRIBUTOR AND RECIPIENT STATES OVERALL AND BY PARTY
 #finding the states that were the top contributors
@@ -91,25 +90,41 @@ rep_pc = flow_pc['REP_PC'].sort_values()
 print(f'\nTop Ten FLows Per Capita of Overall Contributions in 2020 Senate Races:\n{totals_pc[-10:]}')
 print(f'\nTop Ten Flows Per Capita of Democrat Contributions in 2020 Senate Races:\n{dem_pc[-10:]}')
 print(f'\nTop Ten Flows Per Capita of Republican Contributions in 2020 Senate Races:\n{rep_pc[-10:]}')
+print(len(flow_pc))
 
 #%%
-###CREATING A HEATMAP
-#first we are gonna drop the source states that don't include the 50 states plus DC and PR
+###CREATING A HEATMAP AND CREATING CSV FILES FOR MAPPING AND CHORD DIAGRAMS
+#first we are going to drop the source states that don't include the 50 states plus DC and PR
 ###They would be less visually pleasing to map later as well
 trim = flow_sums.drop(['AA','AE','AP','AS','GU','MP','PW','ZZ','VI'],axis='index')
-
-#then we will save trim to a csv to use in the mapping script
-trim.to_csv('all_states_trim.csv')
 
 #creating a heatmap variable of the flows
 heatmap_overall = trim.drop(['DEM','REP'],axis='columns')
 heatmap_dem = trim.drop(['TOTAL_AMOUNT','REP'],axis='columns')
 heatmap_rep = trim.drop(['DEM','TOTAL_AMOUNT'],axis='columns')
 
-#saving each heatmap setup to a csv for use in the holoviews: bokeh extension flow diagram script
-heatmap_overall.to_csv('overall_flows.csv')
-heatmap_dem.to_csv('dem_flows.csv')
-heatmap_rep.to_csv('rep_flows.csv')
+#%%
+#then we will create dfs of combined heatmap dfs and flow dfs to create comprehensive dfs for the chord diagrams
+#it may seem unnecessary but helps the flow data be sorted a bit better
+overall_pc = heatmap_overall 
+overall_pc['SOURCE_POP'] = flow_pc['pop']
+overall_pc['TOTAL_PC'] = flow_pc['TOTAL_PC']
+d_pc = heatmap_dem 
+d_pc['SOURCE_POP'] = flow_pc['pop']
+d_pc['DEM_PC'] = flow_pc['DEM_PC']
+r_pc = heatmap_rep 
+r_pc['SOURCE_POP'] = flow_pc['pop']
+r_pc['REP_PC'] = flow_pc['REP_PC']
+
+#%%
+#saving each combined setup to a CSV for use in the holoviews-bokeh extension flow diagram script so we can look at
+#total amounts and per capita contribution amounts
+overall_pc.to_csv('overall_flows.csv')
+d_pc.to_csv('dem_flows.csv')
+r_pc.to_csv('rep_flows.csv')
+
+#we will save flow_pc to a csv to use in the mapping script
+flow_pc.to_csv('all_states_trim.csv')
 
 #%%
 #unstacking by recipient state to create a grid

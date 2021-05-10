@@ -10,9 +10,7 @@ api = 'https://api.census.gov/data/2018/acs/acs5'
 
 for_clause = 'state:*'
 
-key_value = 'a6c1d09a53f26ed2b244bdd968cd4fcf3312ede5'
-
-payload = {'get':"NAME,B01001_001E",'for':for_clause,'key':key_value}
+payload = {'get':"NAME,B01001_001E",'for':for_clause}
 
 response = requests.get(api,payload)
 if response.status_code == 200:
