@@ -44,12 +44,12 @@ you may have to edit the paths for the input files for some or all scripts.
 For script8 you will have to switch to JupyterLab in order to open the ipynb file properly and to generate the chord
 diagrams.
 
-By the end of script8, you should have 9 chord diagrams for the overall Senate contributions as well as by each major 
-party for all the Senate races as well as absolute and per capita ones for the four key states chosen for this analysis.
-You should also get 6 heatmaps that help articulate the contributions patterns of states and parties in all the Senate 
-races as well as the four key states.
+By the end of script8, you should have 6 chord diagrams for the overall Senate contributions as well as by each major 
+party for all the Senate races as well as the four key ones chosen for this analysis. You should also get 6 heatmaps 
+that help articulate the contributions patterns of states and parties in all the Senate races as well as the four key
+ones.
 
-Then, you can take the outputs of script9 to create various maps displaying similar info for all four key states,
+Then, you can take the outputs of that script9 to create various maps displaying similar info for all four key states,
 highlighting the absolute amounts, the intensity of contributions (the per capita amounts), and the party breakdown 
 of contributions coming from other states to each key state. This can be achieved by joining the 4 CSVs with the shp 
 file for the US. Make sure to cut out Alaska, Hawaii, and the other US island territories in order to make the maps 

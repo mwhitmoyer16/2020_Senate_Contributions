@@ -25,9 +25,7 @@ grouped_by_size = merged.groupby(['RECIPIENT_STATE','PARTY','SMALL_CONTRIBUTION'
 #Breakdown of the number, total amount, and mean of small and large contributions by state and party
 size_dem_rep_summary = grouped_by_size['AMOUNT'].agg(['count','sum','mean'])
 print(f'Breakdown of the number, total amount, and mean of small and large contributions by state and party:\n{size_dem_rep_summary}')
-
-#creating a scatter plot to visualize the amount of small and large contributions in each state and their relationship with party
-#***Under Construction*** 
+ 
 
 #%%
 ###FINDING THE TOP CONTRIBUTOR AND RECIPIENT STATES OVERALL AND BY PARTY
